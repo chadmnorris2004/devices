@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The World of Input & Output Devices — Interactive Poster with Speech</title>
+  <style>
+    body{font-family:Arial, sans-serif;margin:0;padding:0;background:#f5f7fb;color:#111}
+    header{text-align:center;padding:1rem;background:#2b6cb0;color:white}
+    .instructions{background:#e0e7ff;color:#111;text-align:center;padding:0.5rem;font-weight:bold}
+    .container{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;padding:1rem}
+    .device{background:white;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);width:250px;padding:1rem;text-align:center;transition:transform .2s, box-shadow .2s;cursor:pointer}
+    .device:hover{transform:scale(1.05);box-shadow:0 6px 14px rgba(0,0,0,0.15)}
+    .device img{width:150px;height:150px;object-fit:contain;margin-bottom:10px;border-radius:8px}
+    .type{color:#2b6cb0;font-weight:bold;margin-bottom:6px}
+    .desc{font-size:14px;color:#444}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>The World of Input & Output Devices</h1>
+    <p>Hover over or click each image to hear its name, type, and description.</p>
+  </header>
+
+  <div class="instructions">
+    💡 <b>Instructions:</b> Move your mouse over or tap any device image below. The computer will read the device name, type, and its function aloud.
+  </div>
+
+  <div class="container">
+    <div class="device" data-speech="Keyboard. Input device. The keyboard is used to type letters, numbers, and commands into the computer.">
+      <img src="Images/keyboard.jpg" alt="Keyboard">
+      <div class="type">Input Device</div>
+      <div class="desc">The keyboard is used to type letters, numbers, and commands into the computer.</div>
+    </div>
+
+    <div class="device" data-speech="Mouse. Input device. The mouse controls the pointer on the screen and allows clicking, dragging, and selecting items.">
+      <img src="Images/mouse.jpg" alt="Mouse">
+      <div class="type">Input Device</div>
+      <div class="desc">The mouse controls the pointer on the screen and allows clicking, dragging, and selecting items.</div>
+    </div>
+
+    <div class="device" data-speech="Microphone. Input device. The microphone captures sound and converts it into digital signals for recording or communication.">
+      <img src="Images/microphone.jpg" alt="Microphone">
+      <div class="type">Input Device</div>
+      <div class="desc">The microphone captures sound and converts it into digital signals for recording or communication.</div>
+    </div>
+
+    <div class="device" data-speech="Printer. Output device. The printer produces a physical copy of documents or images from the computer onto paper.">
+      <img src="Images/printer.jpg" alt="Printer">
+      <div class="type">Output Device</div>
+      <div class="desc">The printer produces a physical copy of documents or images from the computer onto paper.</div>
+    </div>
+
+    <div class="device" data-speech="Speaker. Output device. Speakers convert digital audio signals into sound, allowing users to hear music, voices, or alerts.">
+      <img src="Images/speaker.jpg" alt="Speakers">
+      <div class="type">Output Device</div>
+      <div class="desc">Speakers convert digital audio signals into sound, allowing users to hear music, voices, or alerts.</div>
+    </div>
+
+    <div class="device" data-speech="Monitor. Output device. The monitor displays text, images, and videos so users can see what the computer is processing.">
+      <img src="Images/monitor.jpg" alt="Monitor">
+      <div class="type">Output Device</div>
+      <div class="desc">The monitor displays text, images, and videos so users can see what the computer is processing.</div>
+    </div>
+
+    <div class="device" data-speech="Scanner. Input device. The scanner captures images or text from paper documents and converts them into digital format.">
+      <img src="Images/scanner.jpg" alt="Scanner">
+      <div class="type">Input Device</div>
+      <div class="desc">The scanner captures images or text from paper documents and converts them into digital format.</div>
+    </div>
+
+    <div class="device" data-speech="Projector. Output device. The projector displays the computer’s screen onto a wall or large surface for group viewing.">
+      <img src="Images/projector.jpg" alt="Projector">
+      <div class="type">Output Device</div>
+      <div class="desc">The projector displays the computer’s screen onto a wall or large surface for group viewing.</div>
+    </div>
+
+    <div class="device" data-speech="Webcam. Input device. The webcam captures live video and images for online communication or recording.">
+      <img src="Images/webcam.jpg" alt="Webcam">
+      <div class="type">Input Device</div>
+      <div class="desc">The webcam captures live video and images for online communication or recording.</div>
+    </div>
+
+    <div class="device" data-speech="Tablet. Both input and output device. The tablet allows input through its touch screen and displays information on the same screen.">
+      <img src="Images/tablet.jpg" alt="Tablet">
+      <div class="type">Both Input and Output Device</div>
+      <div class="desc">The tablet allows input through its touch screen and displays information on the same screen.</div>
+    </div>
+  </div>
+
+  <script>
+    // Function to speak text aloud using the Web Speech API
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // stop ongoing speech
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.rate = 1; // normal speed
+        utter.pitch = 1;
+        utter.volume = 1;
+        utter.lang = 'en-US';
+        window.speechSynthesis.speak(utter);
+      } else {
+        alert('Sorry, your browser does not support speech synthesis.');
+      }
+    }
+
+    // Add event listeners to each device image
+    document.querySelectorAll('.device').forEach(device => {
+      const text = device.getAttribute('data-speech');
+      device.addEventListener('mouseover', () => speak(text));
+      device.addEventListener('click', () => speak(text));
+    });
+  </script>
+</body>
+</html>
